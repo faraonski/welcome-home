@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Home</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+  <!-- LANDING -->
+  <section class="hero" id="home">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h1>Welcome Home 🏡</h1>
+      <p>No matter how your day went, you're safe here.</p>
+      <button onclick="enterHome()">Enter Home</button>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main id="main" class="hidden">
+
+    <!-- MOOD -->
+    <section class="card">
+  <h2>💭 Mood Corner</h2>
+
+  <div class="moods">
+    <button onclick="mood('happy')">😊 Happy</button>
+    <button onclick="mood('sad')">😔 Sad</button>
+    <button onclick="mood('tired')">😴 Tired</button>
+    <button onclick="mood('angry')">😠 Angry</button>
+    <button onclick="mood('anxious')">😟 Anxious</button>
+  </div>
+
+  <div id="chatBox" class="chat-box"></div>
+</section>
+
+    <!-- MUSIC -->
+    <section class="card">
+      <h2>🎵 Music Room</h2>
+      <audio controls>
+        <source src="music/song.mp3" type="audio/mp3">
+      </audio>
+    </section>
+
+   <!-- MEMORY WALL -->
+<section class="card">
+  <h2>🖤 Memory Wall</h2>
+
+  <div class="memory-wall">
+
+    <!-- LOCKED MEMORY 1 -->
+    <div class="polaroid filled locked">
+      <img src="images/you.jpg" />
+      <span class="caption">you</span>
+    </div>
+
+    <!-- LOCKED MEMORY 2 -->
+    <div class="polaroid filled locked">
+      <img src="images/are.jpg" />
+      <span class="caption">are</span>
+    </div>
+
+    <!-- UPLOAD SLOTS -->
+    <div class="polaroid filled locked">
+      <img src="images/my.jpg" />
+      <span class="caption">my</span>
+    </div>
+
+    <div class="polaroid filled locked">
+      <img src="images/favorite.jpg" />
+      <span class="caption">favorite</span>
+    </div>
+
+     <div class="polaroid filled locked">
+      <img src="images/beautiful.jpg" />
+      <span class="caption">beautiful</span>
+    </div>
+
+      <div class="polaroid filled locked">
+      <img src="images/sunset.jpg" />
+      <span class="caption">sunset</span>
+    </div>
+
+  </div>
+</section>
+
+   <!-- LETTERS -->
+<section class="card">
+  <h2>💌 Letters</h2>
+
+  <div class="letters">
+
+    <button onclick="openLetter('sad')">
+      Open when you're sad
+    </button>
+
+    <button onclick="openLetter('miss')">
+      Open when you miss me
+    </button>
+
+    <button onclick="openLetter('tired')">
+      Open when you're tired
+    </button>
+
+  </div>
+
+  <div id="letterBox" class="hidden"></div>
+</section>
+
+    <!-- KISSES -->
+    <section class="card">
+      <h2>💋 Kisses</h2>
+      <button onclick="kiss()">Send Kiss</button>
+      <p>Total kisses: <span id="kissCount">0</span></p>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

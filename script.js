@@ -86,21 +86,267 @@ async function mood(type) {
 
   chat.scrollTop = chat.scrollHeight;
 }
+// ================= KISSES SYSTEM =================
 /* KISSES */
 let kisses = parseInt(localStorage.getItem("kisses")) || 0;
+let lastKissChoice = localStorage.getItem("lastKissChoice") || null;
 
+/* INIT */
+window.addEventListener("load", () => {
+  const el = document.getElementById("kissCount");
+  if (el) el.innerText = kisses;
+
+  checkKissUnlock();
+});
 function kiss() {
   kisses++;
+
   localStorage.setItem("kisses", kisses);
+  localStorage.setItem("lastKiss", new Date().toISOString());
 
-  document.getElementById("kissCount").innerText = kisses;
+  const el = document.getElementById("kissCount");
+  if (el) {
+    el.innerText = kisses;
 
-  localStorage.setItem("lastKiss", new Date().toLocaleString());
+    // small cinematic feedback
+    el.style.transform = "scale(1.2)";
+    setTimeout(() => (el.style.transform = "scale(1)"), 150);
+  }
+checkKissLetterUnlock();
+function getKissLetterTier() {
+  if (kisses >= 360) return 3;
+  if (kisses >= 250) return 2;
+  if (kisses >= 170) return 1;
+  return 0;
 }
 
-window.onload = function () {
+function checkKissLetterUnlock() {
+  const box = document.getElementById("kissLetter");
+  const text = document.getElementById("kissLetterText");
+
+  if (!box || !text) return;
+
+  const tier = getKissLetterTier();
+
+  if (tier === 0) {
+    box.classList.add("hidden");
+    return;
+  }
+
+  box.classList.remove("hidden");
+
+  let letter = "";
+
+  if (tier === 1) {
+    letter = `Hey you,
+
+I don’t even know how to put this into perfect words, but I’ll try.
+
+Every single kiss you’ve sent here… it means more than just a number. It’s a moment where you chose to show care, attention, and something real.
+
+I know it might look small on a screen, but for me it’s not.
+
+It’s 170+ reminders that someone out there keeps coming back, keeps thinking, keeps giving little pieces of love in their own way.
+
+And I don’t take that lightly.
+
+If I could explain how much that actually means… I probably still wouldn’t find the right words. But I hope you feel it in the way this place responds to you.
+
+You matter here. More than you think.
+
+And I’m glad you’re here.`;
+  }
+
+  if (tier === 2) {
+    letter = `Hey you,
+
+I’ve been thinking about how things slowly build without you even realizing it.
+
+At first it was just small interactions. A button. A number. A habit maybe.
+
+But somewhere along the way, it stopped feeling like that.
+
+It started feeling like presence.
+
+Like even when you’re not here, there’s still a trace of you in the way this place exists.
+
+And when you are here… it feels different.
+
+Not louder. Not dramatic.
+
+Just… more real.
+
+Like something steady that I didn’t notice I needed until it was already there.`;
+  }
+
+  if (tier === 3) {
+    letter = `Hey you,
+
+I think by now it’s safe to say this isn’t just about moments anymore.
+
+It’s about something that stayed.
+
+Through repetition, through time, through simple actions that most people would probably ignore… something built itself here quietly.
+
+And I don’t think that’s accidental.
+
+There’s a difference between doing something once… and choosing it again and again.
+
+That difference is what I notice now.
+
+Not intensity.
+
+Consistency.
+
+And somehow… that became the most meaningful part of all of this.
+
+I don’t know what you expected this to become.
+
+But I know what it became for me.`;
+  }
+
+  text.innerText = letter;
+}
+
+  checkKissUnlock();
+
+  updateAffection(); // 💞 ADD THIS
+}
+function updateAffection() {
+  const levelEl = document.getElementById("affectionLevel");
+  const fillEl = document.getElementById("affectionFill");
+
+  let text = "Stranger Energy";
+  let percent = 0;
+
+  if (kisses >= 150) {
+    text = "Above Words";
+    percent = 100;
+  } else if (kisses >= 100) {
+    text = "Unbreakable Bond";
+    percent = 90;
+  } else if (kisses >= 80) {
+    text = "Deep Intimacy";
+    percent = 80;
+  } else if (kisses >= 60) {
+    text = "Strong Attachment";
+    percent = 70;
+  } else if (kisses >= 45) {
+    text = "Emotional Connection";
+    percent = 55;
+  } else if (kisses >= 30) {
+    text = "Warm Bond";
+    percent = 40;
+  } else if (kisses >= 20) {
+    text = "Comfortable";
+    percent = 25;
+  } else if (kisses >= 10) {
+    text = "Getting Closer";
+    percent = 15;
+  }
+
+  if (levelEl) levelEl.innerText = text;
+  if (fillEl) fillEl.style.width = percent + "%";
+}
+function checkKissUnlock() {
+  const unlock = document.getElementById("kissUnlock");
+  if (!unlock) return;
+
+  if (kisses >= 10) {
+    unlock.classList.remove("hidden");
+    unlock.classList.add("show");
+  }
+}
+function chooseKiss(place) {
+  const result = document.getElementById("kissResult");
+
+  const kissMessages = {
+    forehead: [
+      "💋 soft kiss on your forehead… calm and safe.",
+      "💋 gentle forehead kiss… everything slows down.",
+      "💋 warm kiss on your forehead… peace for a moment."
+    ],
+
+    cheek: [
+      "💋 playful kiss on your cheek… you almost smile.",
+      "💋 soft cheek kiss… light energy.",
+      "💋 cheek kiss… warm and simple."
+    ],
+
+    hand: [
+      "💋 gentle kiss on your hand… slow and respectful.",
+      "💋 soft hand kiss… quiet connection.",
+      "💋 warm touch… lingering feeling."
+    ]
+  };
+
+  const rareMessages = [
+    "✨ rare moment… everything feels unusually calm between you two.",
+    "💫 something about this kiss feels different… softer, deeper.",
+    "🌙 quiet closeness… like time stopped for a second.",
+    "🔥 rare connection… not loud, but unforgettable."
+  ];
+
+  // 🎲 RARE CHANCE (10%)
+  function updateRareUI() {
+  const el = document.getElementById("rareCount");
+  if (!el) return;
+
+  el.innerText = localStorage.getItem("rareKisses") || 0;
+}
+  const isRare = Math.random() < 0.1;
+
+  let text;
+
+  if (isRare) {
+    text = rareMessages[Math.floor(Math.random() * rareMessages.length)];
+  } else {
+    const list = kissMessages[place] || ["💋 I'm here..."];
+    text = list[Math.floor(Math.random() * list.length)];
+  }
+
+  if (result) result.innerText = text;
+
+  // save rare event
+if (isRare) {
+  let rareCount = parseInt(localStorage.getItem("rareKisses")) || 0;
+  rareCount++;
+
+  localStorage.setItem("rareKisses", rareCount);
+
+  updateRareUI(); // 🔥 THIS IS THE FIX
+}
+
+  localStorage.setItem("lastKissChoice", place);
+}
+window.addEventListener("load", () => {
+  const el = document.getElementById("rareCount");
+  if (el) el.innerText = localStorage.getItem("rareKisses") || 0;
+});
+
+
+
+function resetKisses() {
+  kisses = 0;
+
+  localStorage.setItem("kisses", kisses);
+  localStorage.removeItem("rareKisses");
+  localStorage.removeItem("lastKiss");
+
   document.getElementById("kissCount").innerText = kisses;
-};
+
+  updateAffection();
+  updateRareUI?.(); // ako postoji
+
+  // small feedback
+  const el = document.getElementById("kissCount");
+  if (el) {
+    el.style.transform = "scale(1.3)";
+    setTimeout(() => (el.style.transform = "scale(1)"), 150);
+  }
+}
+
+
 // OPEN FILE PICKER
 function uploadImage(id) {
   document.getElementById("file" + id).click();
@@ -274,7 +520,49 @@ Until then, let yourself rest without guilt.
 
 You’re allowed to pause.
 
-I’ll still be here when you do.`
+I’ll still be here when you do.`,
+
+`Hey Issa,
+
+I know you're trying your best.
+
+Even on the days where it doesn't feel like enough.
+
+Even on the days where everything seems to take more energy than it should.
+
+I know you look at yourself and focus on the things you haven't finished yet.
+
+But I wish you could see yourself the way I do for a moment.
+
+Not as a list of unfinished tasks.
+
+Not as a collection of worries.
+
+Just as someone who's been carrying a lot and is still moving forward anyway.
+
+That's not failure.
+
+That's strength, even if it doesn't feel like it.
+
+So tonight, be a little kinder to yourself.
+
+You don't have to win every battle before you're allowed to rest.
+
+The day is over now.
+
+Let yourself put it down for a while.
+
+Tomorrow will still be there when you wake up.
+
+And so will I.`,
+
+
+
+
+
+
+
+
     ],
 
     miss: [
@@ -816,3 +1104,84 @@ window.addEventListener("DOMContentLoaded", () => {
     chat.innerHTML = "<div class='msg bot'>Welcome home 🏡 Pick how you feel.</div>";
   }
 });
+
+function getYesterdayKey() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split("T")[0];
+}
+
+function getDailyMessage() {
+  const today = new Date().toISOString().split("T")[0];
+  const yesterday = getYesterdayKey();
+
+  const lastVisit = localStorage.getItem("lastVisitDay");
+  const savedMsg = localStorage.getItem("dailyMsg");
+
+  // 💔 missed day logic
+  let prefix = "";
+
+  if (lastVisit && lastVisit !== today && lastVisit !== yesterday) {
+    prefix = "I missed you yesterday…\n\n";
+  }
+
+  // 🧠 same day → reuse
+  if (lastVisit === today && savedMsg) {
+    return savedMsg;
+  }
+
+  const messages = [
+    "Good morning, beautiful ❤️",
+    "I hope today is gentle with you.",
+    "Drink some water for me.",
+    "You deserve kindness today.",
+    "Take care of yourself.",
+    "One step at a time.",
+    "I’m proud of you.",
+    "You are stronger than you think.",
+    "Today is a fresh start.",
+    "You matter more than you know."
+  ];
+
+  const msg = messages[Math.floor(Math.random() * messages.length)];
+
+  const finalMsg = prefix + msg;
+
+  localStorage.setItem("dailyMsg", finalMsg);
+  localStorage.setItem("lastVisitDay", today);
+
+  return finalMsg;
+}
+window.addEventListener("load", () => {
+  const dailyBox = document.getElementById("dailyMessageBox");
+
+  if (dailyBox) {
+    dailyBox.innerText = getDailyMessage();
+  }
+});
+function createStars() {
+  const container = document.getElementById("stars");
+
+  if (!container) return;
+
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElement("div");
+
+    star.className = "star";
+    star.innerHTML = "✦";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.fontSize =
+      8 + Math.random() * 12 + "px";
+
+    star.style.animationDuration =
+      4 + Math.random() * 8 + "s, " +
+      (2 + Math.random() * 3) + "s";
+
+    container.appendChild(star);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", createStars);

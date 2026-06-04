@@ -23,6 +23,14 @@
   <!-- MAIN -->
   <main id="main" class="hidden">
 
+    <section class="card">
+  <h2>☀️ Daily Message</h2>
+
+  <div id="dailyMessageBox" class="daily-message">
+    Loading...
+  </div>
+</section>
+
     <!-- MOOD -->
     <section class="card">
   <h2>💭 Mood Corner</h2>
@@ -54,34 +62,34 @@
 
     <!-- LOCKED MEMORY 1 -->
     <div class="polaroid filled locked">
-      <img src="you.jpg" />
+      <img src="images/you.jpg" />
       <span class="caption">you</span>
     </div>
 
     <!-- LOCKED MEMORY 2 -->
     <div class="polaroid filled locked">
-      <img src="are.jpg" />
+      <img src="images/are.jpg" />
       <span class="caption">are</span>
     </div>
 
     <!-- UPLOAD SLOTS -->
     <div class="polaroid filled locked">
-      <img src="my.jpg" />
+      <img src="images/my.jpg" />
       <span class="caption">my</span>
     </div>
 
     <div class="polaroid filled locked">
-      <img src="favorite.jpg" />
+      <img src="images/favorite.jpg" />
       <span class="caption">favorite</span>
     </div>
 
      <div class="polaroid filled locked">
-      <img src="beautiful.jpg" />
+      <img src="images/beautiful.jpg" />
       <span class="caption">beautiful</span>
     </div>
 
       <div class="polaroid filled locked">
-      <img src="sunset.jpg" />
+      <img src="images/sunset.jpg" />
       <span class="caption">sunset</span>
     </div>
 
@@ -111,15 +119,54 @@
   <div id="letterBox" class="hidden"></div>
 </section>
 
-    <!-- KISSES -->
-    <section class="card">
-      <h2>💋 Kisses</h2>
-      <button onclick="kiss()">Send Kiss</button>
-      <p>Total kisses: <span id="kissCount">0</span></p>
-    </section>
+   <!-- KISSES -->
+<section class="card">
+  <h2>💋 Kisses</h2>
+
+  <button onclick="kiss()">Send Kiss</button>
+
+  <p>
+    Total kisses:
+    <span id="kissCount">0</span>
+  </p>
+
+  <!-- UNLOCK ZONE (10 kisses reward) -->
+  <div id="kissUnlock" class="unlock-box hidden">
+    💋 You unlocked something...
+    <p>Where would you like a kiss?</p>
+
+    <button onclick="chooseKiss('forehead')">Forehead</button>
+    <button onclick="chooseKiss('cheek')">Cheek</button>
+    <button onclick="chooseKiss('hand')">Hand</button>
+    <button onclick="chooseKiss('lips')">Lips</button>
+    <button onclick="chooseKiss('neck')">Neck</button>
+
+    <p id="kissResult"></p>
+    <p>✨ Rare kisses found: <span id="rareCount">0</span></p>
+  <button onclick="resetKisses()" class="reset-btn">
+  Reset kisses
+</button>
+    <p>
+  Affection level:
+  <span id="affectionLevel">New</span>
+</p>
+
+<div class="affection-bar">
+  <div id="affectionFill"></div>
+</div>
+
+<div id="kissLetter" class="hidden letter-box">
+  <h3>💌 A Special Letter</h3>
+  <p id="kissLetterText"></p>
+</div>
+
+  </div>
+</section>
 
   </main>
 
   <script src="script.js"></script>
 </body>
+
+<div id="stars"></div>
 </html>

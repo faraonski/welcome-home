@@ -138,7 +138,7 @@ function checkKissLetterUnlock() {
   let letter = "";
 
   if (tier === 1) {
-    letter = `Hey you,
+    letter = `Hey issa,
 
 I don’t even know how to put this into perfect words, but I’ll try.
 

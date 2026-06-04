@@ -158,7 +158,7 @@ And I’m glad you’re here.`;
   }
 
   if (tier === 2) {
-    letter = `Hey you,
+    letter = `Hey issa,
 
 I’ve been thinking about how things slowly build without you even realizing it.
 
@@ -180,7 +180,7 @@ Like something steady that I didn’t notice I needed until it was already there
   }
 
   if (tier === 3) {
-    letter = `Hey you,
+    letter = `Hey issa,
 
 I think by now it’s safe to say this isn’t just about moments anymore.
 

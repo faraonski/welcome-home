@@ -146,7 +146,7 @@ Every single kiss you’ve sent here… it means more than just a number. It’s
 
 I know it might look small on a screen, but for me it’s not.
 
-It’s 170+ reminders that someone out there keeps coming back, keeps thinking, keeps giving little pieces of love in their own way.
+It’s 170 reminders that someone out there keeps coming back, keeps thinking, keeps giving little pieces of love in their own way.
 
 And I don’t take that lightly.
 
@@ -205,7 +205,13 @@ I don’t know what you expected this to become.
 But I know what it became for me.`;
   }
 
-  text.innerText = letter;
+  box.classList.remove("show");
+
+setTimeout(async () => {
+  box.classList.add("show");
+  await typeWriter(text, letter);
+}, 150);
+
 }
 
   checkKissUnlock();
@@ -324,7 +330,30 @@ window.addEventListener("load", () => {
   if (el) el.innerText = localStorage.getItem("rareKisses") || 0;
 });
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function typeWriter(element, text) {
+  element.innerText = "";
+  element.classList.add("typing-cursor");
+
+  for (let i = 0; i < text.length; i++) {
+    element.innerText += text[i];
+
+    const char = text[i];
+
+    if (char === "." || char === "!" || char === "?") {
+      await sleep(120);
+    } else if (char === ",") {
+      await sleep(70);
+    } else {
+      await sleep(12);
+    }
+  }
+
+  element.classList.remove("typing-cursor");
+}
 
 function resetKisses() {
   kisses = 0;
@@ -1185,3 +1214,187 @@ function createStars() {
 }
 
 window.addEventListener("DOMContentLoaded", createStars);
+
+/* WHAT DO YOU NEED */
+
+const needMessages = {
+
+  hug: [
+    "Come here. 🫂 You don't have to say anything. Just stay here for a moment.",
+    "If I could, I'd give you the biggest hug right now. 🫂",
+    "No fixing things. No explaining. Just a hug. ❤️",
+    "Come here, you've had enough for today. Let me hold you for a while. 🫂",
+    "You don't need a reason for a hug. You can always have one from me. ❤️",
+    "Just imagine I'm wrapping my arms around you right now. Stay there for a little while. 🫂",
+    "Whatever happened today, you can leave it outside for a moment. Come here. 🫂",
+    "A quiet hug. No questions, no advice, no expectations. Just me being here with you. ❤️",
+    "You look like you could use one of these. 🫂 Consider yourself officially hugged.",
+    "Sometimes you don't need words. Sometimes you just need someone to hold you. So... come here. ❤️"
+  ],
+
+  kiss: [
+    "Come here... 💋 *mwah*",
+    "One little kiss, just for you. 💋",
+    "You asked for a kiss? You got one. 💋❤️",
+    "A tiny kiss for your forehead. 💋 Now breathe.",
+    "Come a little closer... that's better. 💋",
+    "You deserve a kiss today. So here. 💋 Don't argue with me.",
+    "One kiss now, and maybe another if you stay a little longer. ❤️💋",
+    "Sending you a kiss through the screen. Hopefully it reaches you. 💋",
+    "Consider this your little reminder that someone is thinking about you. 💋",
+    "Close your eyes for a second... *mwah*. There. That's yours. ❤️"
+  ],
+
+  words: [
+    "Whatever you're feeling right now, you don't have to hide it.",
+    "You're doing better than you think you are. ❤️",
+    "Take a breath. You don't have to figure everything out tonight.",
+    "You don't have to have everything together all the time. It's okay to just exist.",
+    "Whatever today brought you, you made it through. That's something worth being proud of.",
+    "You are allowed to have bad days without thinking you've become a bad version of yourself.",
+    "Please be a little kinder to yourself today. You deserve the same kindness you give everyone else. ❤️",
+    "You don't need to solve your whole life tonight. Just take the next small step.",
+    "Even when you don't feel like you're doing enough, someone might still be incredibly proud of you.",
+    "You matter. Not because of what you accomplish, but simply because you're you. ❤️"
+  ],
+
+  voice: [
+    "Maybe you need to hear my voice right now. 🎙️",
+    "Go listen to something from me. I'll be right there.",
+    "Press play. I have something to tell you. ❤️",
+    "Maybe words on a screen aren't enough today. Let me talk to you instead. 🎙️",
+    "Come listen for a little while. You don't have to say anything back.",
+    "If you miss hearing me, there's something waiting for you. ❤️",
+    "Put your headphones on and come listen to me for a moment. 🎙️",
+    "Sometimes hearing someone's voice is all you need. So... press play. ❤️",
+    "I left a little piece of myself there for you. Go listen. 🎙️",
+    "Need me for a minute? I'm only one play button away. ❤️"
+  ],
+
+  quiet: [
+    "Then stay here for a moment. You don't have to do anything. 🌙",
+    "Let everything be quiet for a little while.",
+    "No words. No pressure. Just breathe. 🌙",
+    "You don't have to talk. You can just sit here and let your mind rest.",
+    "For the next few moments, nothing needs your attention. Just breathe.",
+    "Put everything down for a minute. The world can wait. 🌙",
+    "Stay as long as you need. There's nowhere else you have to be right now.",
+    "Let your shoulders relax. Take one slow breath. Then another. That's enough.",
+    "Sometimes peace is the only thing we need. So here's a little piece of quiet for you. 🌙",
+    "No questions, no expectations, no fixing anything. Just a quiet little moment for yourself. ❤️"
+  ]
+
+};
+
+function need(type) {
+
+  const result = document.getElementById("needResult");
+
+  if (!result) return;
+
+  const messages = needMessages[type];
+
+  if (!messages) return;
+
+  const message =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  result.style.opacity = "0";
+
+  setTimeout(() => {
+    result.innerText = message;
+    result.style.opacity = "1";
+  }, 250);
+}
+
+/* ================================
+   VOICE CORNER
+================================ */
+
+const voiceMessages = {
+
+  morning: [
+    "voices/morning1.mp3",
+    "voices/morning2.mp3",
+    "voices/morning3.mp3"
+  ],
+
+  night: [
+    "voices/night1.mp3",
+    "voices/night2.mp3",
+    "voices/night3.mp3"
+  ],
+
+  sad: [
+    "voices/sad1.mp3",
+    "voices/sad2.mp3",
+    "voices/sad3.mp3"
+  ],
+
+  tired: [
+    "voices/tired1.mp3",
+    "voices/tired2.mp3",
+    "voices/tired3.mp3"
+  ],
+
+  miss: [
+    "voices/miss1.mp3",
+    "voices/miss2.mp3",
+    "voices/miss3.mp3"
+  ],
+
+  comfort: [
+    "voices/comfort1.mp3",
+    "voices/comfort2.mp3",
+    "voices/comfort3.mp3"
+  ]
+
+};
+
+let lastVoice = {};
+
+
+function playVoice(type) {
+
+  const player = document.getElementById("voicePlayer");
+  const message = document.getElementById("voiceMessage");
+
+  if (!player) return;
+
+  const list = voiceMessages[type];
+
+  if (!list || list.length === 0) return;
+
+  let selected;
+
+  // Prevent same voice twice in a row
+  do {
+    selected =
+      list[Math.floor(Math.random() * list.length)];
+  } while (
+    list.length > 1 &&
+    selected === lastVoice[type]
+  );
+
+  lastVoice[type] = selected;
+
+  player.src = selected;
+  player.currentTime = 0;
+
+  player.play();
+
+  if (message) {
+
+    const descriptions = {
+      morning: "A little morning kiss for you. ☀️💋",
+      night: "A little goodnight message for you. 🌙💋",
+      sad: "You don't have to go through everything alone. 🫂",
+      tired: "Come rest for a little while. 😴❤️",
+      miss: "I know you miss me... so I'm here. 💌",
+      comfort: "Come here. You could use a little comfort. 🫂❤️"
+    };
+
+    message.innerText =
+      descriptions[type] || "A little message for you. ❤️";
+  }
+}

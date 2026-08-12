@@ -31,6 +31,37 @@
   </div>
 </section>
 
+<!-- WHAT DO YOU NEED -->
+<section class="card need-card">
+  <h2>🫶 What do you need right now?</h2>
+
+  <div class="need-options">
+
+    <button onclick="need('hug')">
+      🫂 A hug
+    </button>
+
+    <button onclick="need('kiss')">
+      💋 A kiss
+    </button>
+
+    <button onclick="need('words')">
+      💌 Some words
+    </button>
+
+    <button onclick="need('voice')">
+      🎙 Hear my voice
+    </button>
+
+    <button onclick="need('quiet')">
+      🌙 A quiet moment
+    </button>
+
+  </div>
+
+  <div id="needResult" class="need-result"></div>
+</section>
+
     <!-- MOOD -->
     <section class="card">
   <h2>💭 Mood Corner</h2>
@@ -46,13 +77,44 @@
   <div id="chatBox" class="chat-box"></div>
 </section>
 
-    <!-- MUSIC -->
-    <section class="card">
-      <h2>🎵 Music Room</h2>
-      <audio controls>
-        <source src="music/song.mp3" type="audio/mp3">
-      </audio>
-    </section>
+    <!-- VOICE CORNER -->
+<section class="card">
+  <h2>🎙️ Voice Corner</h2>
+
+  <p id="voiceMessage">
+    Maybe you need to hear my voice right now. ❤️
+  </p>
+
+  <div class="voice-buttons">
+
+    <button onclick="playVoice('morning')">
+      ☀️ Good Morning Kiss
+    </button>
+
+    <button onclick="playVoice('night')">
+      🌙 Good Night Kiss
+    </button>
+
+    <button onclick="playVoice('sad')">
+      😔 When You're Sad
+    </button>
+
+    <button onclick="playVoice('tired')">
+      😴 When You're Tired
+    </button>
+
+    <button onclick="playVoice('miss')">
+      💌 When You Miss Me
+    </button>
+
+    <button onclick="playVoice('comfort')">
+      🫂 When You Need Comfort
+    </button>
+
+  </div>
+
+  <audio id="voicePlayer" controls></audio>
+</section>
 
    <!-- MEMORY WALL -->
 <section class="card">
@@ -62,34 +124,34 @@
 
     <!-- LOCKED MEMORY 1 -->
     <div class="polaroid filled locked">
-      <img src="you.jpg" />
+      <img src="images/you.jpg" />
       <span class="caption">you</span>
     </div>
 
     <!-- LOCKED MEMORY 2 -->
     <div class="polaroid filled locked">
-      <img src="are.jpg" />
+      <img src="images/are.jpg" />
       <span class="caption">are</span>
     </div>
 
     <!-- UPLOAD SLOTS -->
     <div class="polaroid filled locked">
-      <img src="my.jpg" />
+      <img src="images/my.jpg" />
       <span class="caption">my</span>
     </div>
 
     <div class="polaroid filled locked">
-      <img src="favorite.jpg" />
+      <img src="images/favorite.jpg" />
       <span class="caption">favorite</span>
     </div>
 
      <div class="polaroid filled locked">
-      <img src="beautiful.jpg" />
+      <img src="images/beautiful.jpg" />
       <span class="caption">beautiful</span>
     </div>
 
       <div class="polaroid filled locked">
-      <img src="sunset.jpg" />
+      <img src="images/sunset.jpg" />
       <span class="caption">sunset</span>
     </div>
 

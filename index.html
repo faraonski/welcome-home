@@ -124,34 +124,34 @@
 
     <!-- LOCKED MEMORY 1 -->
     <div class="polaroid filled locked">
-      <img src="you.jpg" />
+      <img src="images/you.jpg" />
       <span class="caption">you</span>
     </div>
 
     <!-- LOCKED MEMORY 2 -->
     <div class="polaroid filled locked">
-      <img src="are.jpg" />
+      <img src="images/are.jpg" />
       <span class="caption">are</span>
     </div>
 
     <!-- UPLOAD SLOTS -->
     <div class="polaroid filled locked">
-      <img src="my.jpg" />
+      <img src="images/my.jpg" />
       <span class="caption">my</span>
     </div>
 
     <div class="polaroid filled locked">
-      <img src="favorite.jpg" />
+      <img src="images/favorite.jpg" />
       <span class="caption">favorite</span>
     </div>
 
      <div class="polaroid filled locked">
-      <img src="beautiful.jpg" />
+      <img src="images/beautiful.jpg" />
       <span class="caption">beautiful</span>
     </div>
 
       <div class="polaroid filled locked">
-      <img src="sunset.jpg" />
+      <img src="images/sunset.jpg" />
       <span class="caption">sunset</span>
     </div>
 
@@ -232,3 +232,142 @@
 
 <div id="stars"></div>
 </html>
+
+
+<!-- BIRTHDAY MODE -->
+<section class="card birthday-trigger">
+  <h2>🎁 Something Special</h2>
+
+  <p>
+    I made something special for your birthday...
+  </p>
+
+  <button onclick="activateBirthdayMode()">
+    🎂 Open Birthday Surprise
+  </button>
+</section>
+
+<!-- BIRTHDAY MODE -->
+<div id="birthdayMode" class="birthday-mode hidden">
+
+<div id="birthdaySparkles"></div>
+
+<div id="birthdayShootingStars"></div>
+
+<div id="birthdayBurst"></div>
+
+<div id="birthdayConfetti"></div>
+
+  <div class="birthday-balloons">
+    <span>🎈</span>
+    <span>🎈</span>
+    <span>🎈</span>
+    <span>🎈</span>
+    <span>🎈</span>
+    <span>🎈</span>
+  </div>
+
+  <div class="birthday-content">
+
+    <h1>🎂 Happy Birthday ❤️</h1>
+
+    <p>
+      Today is all about you.
+    </p>
+<div class="birthday-cake">
+
+  <div class="candles">
+
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+
+    <div class="candle">
+      <div class="flame"></div>
+    </div>
+
+  </div>
+
+  <div class="cake-top"></div>
+  <div class="cake-middle"></div>
+  <div class="cake-bottom"></div>
+
+</div>
+
+<button
+  id="wishButton"
+  class="wish-button"
+  onclick="makeWish()"
+>
+  ✨ Make a Wish
+</button>
+
+<p id="wishMessage" class="wish-message"></p>
+  </div>
+
+  <div id="birthdayNext" class="birthday-next hidden">
+
+  <p>
+  Ready to see what's waiting for you next? ✨
+</p>
+
+<div class="birthday-gifts">
+
+  <button
+    class="birthday-gift"
+    onclick="openBirthdayGift(1, this)"
+  >
+    <span class="gift-icon">🎁</span>
+    <span class="gift-label">A letter for you</span>
+  </button>
+
+  <button
+    class="birthday-gift"
+    onclick="openBirthdayGift(2, this)"
+  >
+    <span class="gift-icon">🎁</span>
+    <span class="gift-label">A surprise</span>
+  </button>
+
+  <button
+    class="birthday-gift"
+    onclick="openBirthdayGift(3, this)"
+  >
+    <span class="gift-icon">🎁</span>
+    <span class="gift-label">One more thing...</span>
+  </button>
+
+</div>
+
+<div class="night-sky-subtitle">
+
+  Make a wish when you see a shooting star. 🌠
+
+  
+
+  <button
+    class="night-wish-button"
+    onclick="makeNightWish()"
+  >
+    Make another wish ✨
+  </button>
+
+</div>
+
+<div id="birthdayGiftResult"></div>
+
+</div>
+
+</div>

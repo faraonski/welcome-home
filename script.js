@@ -1314,39 +1314,39 @@ function need(type) {
 const voiceMessages = {
 
   morning: [
-    "morning1.mp3",
-    "morning2.mp3",
-    "morning3.mp3"
+    "voices/morning1.mp3",
+    "voices/morning2.mp3",
+    "voices/morning3.mp3"
   ],
 
   night: [
-    "night1.mp3",
-    "night2.mp3",
-    "night3.mp3"
+    "voices/night1.mp3",
+    "voices/night2.mp3",
+    "voices/night3.mp3"
   ],
 
   sad: [
-    "sad1.mp3",
-    "sad2.mp3",
-    "sad3.mp3"
+    "voices/sad1.mp3",
+    "voices/sad2.mp3",
+    "voices/sad3.mp3"
   ],
 
   tired: [
-    "tired1.mp3",
-    "tired2.mp3",
-    "tired3.mp3"
+    "voices/tired1.mp3",
+    "voices/tired2.mp3",
+    "voices/tired3.mp3"
   ],
 
   miss: [
-    "miss1.mp3",
-    "miss2.mp3",
-    "miss3.mp3"
+    "voices/miss1.mp3",
+    "voices/miss2.mp3",
+    "voices/miss3.mp3"
   ],
 
   comfort: [
-    "comfort1.mp3",
-    "comfort2.mp3",
-    "comfort3.mp3"
+    "voices/comfort1.mp3",
+    "voices/comfort2.mp3",
+    "voices/comfort3.mp3"
   ]
 
 };
@@ -1397,4 +1397,1527 @@ function playVoice(type) {
     message.innerText =
       descriptions[type] || "A little message for you. ❤️";
   }
+}
+
+
+/* ================================
+   🎂 BIRTHDAY MODE
+================================ */
+
+function activateBirthdayMode() {
+
+  const birthday = document.getElementById("birthdayMode");
+
+  if (!birthday) return;
+
+  birthday.classList.remove("hidden");
+
+  createBirthdaySparkles();
+
+  startShootingStars();
+
+  setTimeout(() => {
+    birthday.classList.add("active");
+  }, 50);
+}
+
+function createBirthdaySparkles() {
+
+  const container =
+    document.getElementById("birthdaySparkles");
+
+  if (!container) return;
+
+  // Prevent duplicates
+  if (container.children.length > 0) return;
+
+  for (let i = 0; i < 60; i++) {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.classList.add("birthday-sparkle");
+
+    sparkle.style.left =
+      Math.random() * 100 + "%";
+
+    sparkle.style.top =
+      Math.random() * 100 + "%";
+
+    sparkle.style.animationDuration =
+      (2 + Math.random() * 4) + "s";
+
+    sparkle.style.animationDelay =
+      Math.random() * 5 + "s";
+
+    const size =
+      2 + Math.random() * 4;
+
+    sparkle.style.width = size + "px";
+    sparkle.style.height = size + "px";
+
+    container.appendChild(sparkle);
+  }
+}
+
+function createShootingStar() {
+
+  const container =
+    document.getElementById("birthdayShootingStars");
+
+  if (!container) return;
+
+  const star = document.createElement("div");
+
+  star.classList.add("shooting-star");
+
+  /*
+    Start from a random position
+    near the top/right of the screen
+  */
+
+  star.style.left =
+    (20 + Math.random() * 80) + "%";
+
+  star.style.top =
+    (Math.random() * 60) + "%";
+
+  const duration =
+    0.8 + Math.random() * 0.8;
+
+  star.style.animationDuration =
+    duration + "s";
+
+  container.appendChild(star);
+
+  /*
+    Remove after animation
+  */
+
+  setTimeout(() => {
+    star.remove();
+  }, duration * 1000);
+}
+let shootingStarInterval;
+
+function startShootingStars() {
+
+  createShootingStar();
+
+  shootingStarInterval =
+    setInterval(() => {
+
+      createShootingStar();
+
+    }, 1800 + Math.random() * 2500);
+}
+
+function makeWish() {
+
+  const flames =
+    document.querySelectorAll(".flame");
+
+  const button =
+    document.getElementById("wishButton");
+
+  const message =
+    document.getElementById("wishMessage");
+
+  // 🕯️ Blow out candles one by one
+
+  flames.forEach((flame, index) => {
+
+    setTimeout(() => {
+
+      flame.style.animation = "none";
+
+      flame.style.opacity = "0";
+
+      flame.style.transform =
+        "translateX(-50%) scale(0)";
+
+    }, index * 120);
+
+  });
+
+  // Wait until the final candle disappears
+
+  setTimeout(() => {
+
+    // 💥 BIRTHDAY BURST
+
+    birthdayBurst();
+
+    birthdayConfetti();
+
+    // 🎉 Button changes
+
+    button.innerText =
+      "✨ Wish made...";
+
+    // ❤️ Message
+
+   setTimeout(() => {
+
+  message.innerText =
+    "Whatever you wished for, I hope this year brings you closer to it. ❤️";
+
+  message.classList.add("show");
+
+  setTimeout(() => {
+
+    const next =
+      document.getElementById("birthdayNext");
+
+    if (next) {
+      next.classList.remove("hidden");
+
+      setTimeout(() => {
+        next.classList.add("show");
+      }, 50);
+    }
+
+  }, 1800);
+
+}, 500);
+  }, flames.length * 120 + 150);
+
+  button.disabled = true;
+}
+
+function birthdayBurst() {
+
+  const container =
+    document.getElementById("birthdayBurst");
+
+  if (!container) return;
+
+  const symbols = [
+    "✨",
+    "✦",
+    "✧",
+    "💖",
+    "🎉",
+    "⭐"
+  ];
+
+  for (let i = 0; i < 45; i++) {
+
+    const particle =
+      document.createElement("div");
+
+    particle.classList.add(
+      "burst-particle"
+    );
+
+    particle.innerText =
+      symbols[
+        Math.floor(
+          Math.random() * symbols.length
+        )
+      ];
+
+    const angle =
+      Math.random() * Math.PI * 2;
+
+    const distance =
+      100 + Math.random() * 300;
+
+    const x =
+      Math.cos(angle) * distance;
+
+    const y =
+      Math.sin(angle) * distance;
+
+    particle.style.setProperty(
+      "--x",
+      x + "px"
+    );
+
+    particle.style.setProperty(
+      "--y",
+      y + "px"
+    );
+
+    particle.style.setProperty(
+      "--rotation",
+      (Math.random() * 720 - 360) + "deg"
+    );
+
+    particle.style.animationDelay =
+      Math.random() * 0.15 + "s";
+
+    container.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 1500);
+  }
+}
+
+function birthdayConfetti() {
+
+  const container =
+    document.getElementById("birthdayConfetti");
+
+  if (!container) return;
+
+  const pieces = 90;
+
+  for (let i = 0; i < pieces; i++) {
+
+    const piece =
+      document.createElement("div");
+
+    piece.classList.add(
+      "confetti-piece"
+    );
+
+    // Random horizontal position
+
+    piece.style.left =
+      Math.random() * 100 + "%";
+
+    // Random size
+
+    const width =
+      5 + Math.random() * 6;
+
+    const height =
+      8 + Math.random() * 10;
+
+    piece.style.width =
+      width + "px";
+
+    piece.style.height =
+      height + "px";
+
+    // Random drift
+
+    piece.style.setProperty(
+      "--drift",
+      (Math.random() * 300 - 150) + "px"
+    );
+
+    // Random rotation
+
+    piece.style.setProperty(
+      "--rotation",
+      (Math.random() * 1440 - 720) + "deg"
+    );
+
+    // Random speed
+
+    piece.style.animationDuration =
+      (2.5 + Math.random() * 2.5) + "s";
+
+    // Slightly different delays
+
+    piece.style.animationDelay =
+      Math.random() * 0.8 + "s";
+
+    container.appendChild(piece);
+
+    setTimeout(() => {
+      piece.remove();
+    }, 6000);
+  }
+}
+
+function goToBirthdayNext() {
+
+  const content =
+    document.querySelector(".birthday-content");
+
+  if (!content) return;
+
+  // Fade current birthday scene out
+  content.classList.add("scene-fade-out");
+
+  setTimeout(() => {
+
+    showBirthdayNextScene();
+
+  }, 900);
+}
+function showBirthdayNextScene() {
+
+  const content =
+    document.querySelector(".birthday-content");
+
+  if (!content) return;
+
+  content.innerHTML = `
+
+    <div class="birthday-next-scene">
+
+      <div class="next-scene-icon">
+        🎁
+      </div>
+
+      <h1>
+        There's more...
+      </h1>
+
+      <p>
+        I made a few little things just for you. ❤️
+      </p>
+
+      <div class="birthday-gifts">
+
+        <button
+          class="birthday-gift gift-one"
+          onclick="openBirthdayGift(1)"
+        >
+          <span class="gift-icon">🎁</span>
+          <span class="gift-label">
+            A letter for you
+          </span>
+        </button>
+
+        <button
+          class="birthday-gift"
+          onclick="openBirthdayGift(2)"
+        >
+          <span class="gift-icon">🎁</span>
+          <span class="gift-label">
+            A surprise
+          </span>
+        </button>
+
+        <button
+          class="birthday-gift"
+          onclick="openBirthdayGift(3)"
+        >
+          <span class="gift-icon">🎁</span>
+          <span class="gift-label">
+            One more thing...
+          </span>
+        </button>
+
+      </div>
+
+      <!-- THIS WAS MISSING -->
+      <div id="birthdayGiftResult"></div>
+
+    </div>
+
+  `;
+
+  content.classList.remove("scene-fade-out");
+
+  content.classList.add("scene-fade-in");
+}
+function openBirthdayGift(number, button) {
+
+  console.log("Gift clicked:", number);
+
+  if (number === 2) {
+  openBirthdayVoice(button);
+  return;
+}
+
+if (number === 3) {
+  openBirthdayNightSky(button);
+  return;
+}
+
+if (number !== 1) {
+  console.log("This gift is not implemented yet.");
+  return;
+}
+
+if (!button) {
+  console.log("Button not found.");
+  return;
+}
+  const result =
+    document.getElementById("birthdayGiftResult");
+
+  if (!result) {
+    console.log("birthdayGiftResult does not exist.");
+    return;
+  }
+
+  // 🎁 Shake the gift
+
+  button.classList.add("opening");
+
+  setTimeout(() => {
+
+    button.classList.remove("opening");
+    button.classList.add("opened");
+
+    // 💌 Create envelope
+
+    result.innerHTML = `
+
+  <div class="envelope-wrapper">
+
+    <div class="envelope">
+
+      <div class="envelope-back"></div>
+
+      <div class="letter-paper">
+
+        <div class="letter-content">
+
+          <h2>💌 A letter for you</h2>
+
+          <p>
+My beautiful,
+
+Today is your birthday, and I wish I could somehow put into words just how much you mean to me.
+
+You are one of those people who became so important to me that sometimes I don't even know how to explain it. Somehow, your smile can make an ordinary day feel different, and knowing that you're happy genuinely makes me happy too.
+
+More than anything, I want to be someone who adds happiness to your life. Someone who makes you smile when you've had a difficult day, someone you can feel safe with, someone who reminds you that you are loved, appreciated, and never alone.
+
+I don't want to only celebrate you today. I want to celebrate all the little things that make you who you are your heart, your smile, your kindness, your weird little moments, and everything that makes you uniquely you.
+
+I hope this new year of your life brings you beautiful memories, peaceful days, unexpected happiness, and everything you've been wishing for.
+
+And if I can be a small part of making those days better, then that would mean more to me than you probably realize.
+
+So today, I just want you to remember one thing:
+
+You are incredibly special to me.
+
+Happy Birthday, beautiful. ❤️
+
+Now... there's still more waiting for you.
+          </p>
+
+          <button
+            class="next-present-button"
+            onclick="nextBirthdayPresent()"
+          >
+            Ready for the next present? 🎁
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="envelope-front"></div>
+
+      <div class="envelope-flap"></div>
+
+    </div>
+
+  </div>
+
+`;
+    // ✉️ Find the envelope we just created
+
+    const envelope =
+      result.querySelector(".envelope-wrapper");
+
+    // ✨ Open it after a short delay
+
+    if (envelope) {
+
+      setTimeout(() => {
+
+        envelope.classList.add("open");
+
+      }, 700);
+
+    }
+
+  }, 650);
+
+}
+
+function nextBirthdayPresent() {
+
+  const letter =
+    document.querySelector(".envelope-wrapper");
+
+  if (!letter) return;
+
+  letter.classList.add("letter-closing");
+
+  setTimeout(() => {
+
+    letter.remove();
+
+    const result =
+      document.getElementById("birthdayGiftResult");
+
+    if (!result) return;
+
+    result.innerHTML = `
+
+      <div class="next-present">
+
+        <div class="next-present-icon">
+          🎁
+        </div>
+
+        <h2>
+          Ready for the next one?
+        </h2>
+
+        <p>
+          You thought that was all? ❤️
+        </p>
+
+      </div>
+
+    `;
+
+  }, 900);
+}
+
+function openBirthdayVoice(button) {
+
+  if (!button) return;
+
+  const result =
+    document.getElementById("birthdayGiftResult");
+
+  if (!result) return;
+
+  button.classList.add("opening");
+
+  setTimeout(() => {
+
+    button.classList.remove("opening");
+    button.classList.add("opened");
+
+    result.innerHTML = `
+
+      <div class="birthday-voice-card">
+
+        <div class="voice-heart">
+          ❤️
+        </div>
+
+        <h2>
+          A little message for you
+        </h2>
+
+        <p class="voice-subtitle">
+          Because sometimes I want you to hear
+          my voice instead of reading my words.
+        </p>
+
+
+        <div class="birthday-player">
+
+          <div
+            id="voiceVisual"
+            class="voice-visual"
+          >
+            🎙️
+          </div>
+
+
+          <button
+            id="birthdayVoiceButton"
+            class="birthday-play-button"
+            onclick="playBirthdayVoice()"
+          >
+            ▶
+          </button>
+
+
+          <div class="voice-info">
+
+            <span id="birthdayVoiceStatus">
+              Press play when you're ready ❤️
+            </span>
+
+
+            <div class="voice-wave">
+
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+
+            </div>
+
+
+            <div class="voice-progress">
+
+              <div
+                id="birthdayVoiceProgress"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="birthdayVoiceKisses"
+          class="birthday-voice-kisses"
+        >
+        </div>
+
+
+        <audio
+          id="birthdayVoiceAudio"
+          preload="metadata"
+        ></audio>
+
+
+        <button
+          class="next-present-button"
+          onclick="closeBirthdayVoice()"
+        >
+          Ready for the next present? 🎁
+        </button>
+
+      </div>
+
+    `;
+
+
+    const voices = [
+
+      "birthday1.mp3",
+    
+    ];
+
+
+    const randomVoice =
+      voices[
+        Math.floor(
+          Math.random() * voices.length
+        )
+      ];
+
+
+    const audio =
+      document.getElementById(
+        "birthdayVoiceAudio"
+      );
+
+
+    audio.src = randomVoice;
+
+
+    console.log(
+      "Birthday voice:",
+      randomVoice
+    );
+
+
+    audio.addEventListener(
+      "timeupdate",
+      () => {
+
+        if (!audio.duration) return;
+
+
+        const progress =
+          (audio.currentTime /
+            audio.duration) * 100;
+
+
+        const bar =
+          document.getElementById(
+            "birthdayVoiceProgress"
+          );
+
+
+        if (bar) {
+
+          bar.style.width =
+            progress + "%";
+
+        }
+
+      }
+    );
+
+
+    audio.addEventListener(
+      "ended",
+      () => {
+
+        const playButton =
+          document.getElementById(
+            "birthdayVoiceButton"
+          );
+
+
+        const status =
+          document.getElementById(
+            "birthdayVoiceStatus"
+          );
+
+
+        const visual =
+          document.getElementById(
+            "voiceVisual"
+          );
+
+
+        const wave =
+          document.querySelector(
+            ".voice-wave"
+          );
+
+
+        if (playButton) {
+
+          playButton.innerText =
+            "▶";
+
+        }
+
+
+        if (status) {
+
+          status.innerText =
+            "I hope you smiled listening to that. ❤️";
+
+        }
+
+
+        if (visual) {
+
+          visual.classList.remove(
+            "playing"
+          );
+
+        }
+
+
+        if (wave) {
+
+          wave.classList.remove(
+            "playing"
+          );
+
+        }
+
+
+        const kissReward =
+          document.getElementById(
+            "birthdayVoiceKisses"
+          );
+
+
+        if (kissReward) {
+
+          kissReward.innerHTML =
+            "💋💋💋 +10 kisses";
+
+          kissReward.classList.add(
+            "kiss-reveal"
+          );
+
+        }
+
+      }
+    );
+
+
+  }, 650);
+
+}
+function playBirthdayVoice() {
+
+  const audio =
+    document.getElementById(
+      "birthdayVoiceAudio"
+    );
+
+  const button =
+    document.getElementById(
+      "birthdayVoiceButton"
+    );
+
+  const status =
+    document.getElementById(
+      "birthdayVoiceStatus"
+    );
+
+  const visual =
+    document.getElementById(
+      "voiceVisual"
+    );
+
+  const wave =
+    document.querySelector(
+      ".voice-wave"
+    );
+
+
+  if (!audio) return;
+
+
+  if (audio.paused) {
+
+    audio.play();
+
+
+    if (button) {
+      button.innerText = "❚❚";
+    }
+
+
+    if (status) {
+
+      status.innerText =
+        "Playing something I wanted you to hear... ❤️";
+
+    }
+
+
+    if (visual) {
+
+      visual.classList.add(
+        "playing"
+      );
+
+    }
+
+
+    if (wave) {
+
+      wave.classList.add(
+        "playing"
+      );
+      startSmooches();
+    }
+
+  } else {
+
+    audio.pause();
+
+
+    if (button) {
+
+      button.innerText =
+        "▶";
+
+    }
+
+
+    if (status) {
+
+      status.innerText =
+        "Paused ❤️";
+
+    }
+
+
+    if (visual) {
+
+      visual.classList.remove(
+        "playing"
+      );
+
+    }
+
+
+    if (wave) {
+
+      wave.classList.remove(
+        "playing"
+      );
+
+    }
+
+  }
+
+}
+function closeBirthdayVoice() {
+
+  const card =
+    document.querySelector(
+      ".birthday-voice-card"
+    );
+
+  if (!card) return;
+
+  card.classList.add("voice-closing");
+
+  setTimeout(() => {
+
+    card.remove();
+
+  }, 700);
+}
+
+function createSmooch() {
+
+  const container =
+    document.getElementById(
+      "smoochContainer"
+    );
+
+  if (!container) return;
+
+  const smooch =
+    document.createElement("div");
+
+  smooch.className = "smooch";
+
+  smooch.innerText = "💋";
+
+  const startX =
+    Math.random() * 80 + 10;
+
+  const flyX =
+    (Math.random() - 0.5) * 180;
+
+  const rotation =
+    (Math.random() - 0.5) * 40;
+
+  smooch.style.left =
+    startX + "%";
+
+  smooch.style.bottom =
+    "20px";
+
+  smooch.style.setProperty(
+    "--fly-x",
+    flyX + "px"
+  );
+
+  smooch.style.setProperty(
+    "--rotation",
+    rotation + "deg"
+  );
+
+  container.appendChild(smooch);
+
+  setTimeout(() => {
+    smooch.remove();
+  }, 1800);
+}
+let smoochInterval = null;
+
+function startSmooches() {
+
+  stopSmooches();
+
+  createSmooch();
+
+  smoochInterval =
+    setInterval(() => {
+
+      createSmooch();
+
+    }, 2500);
+}
+
+function stopSmooches() {
+
+  if (smoochInterval) {
+
+    clearInterval(
+      smoochInterval
+    );
+
+    smoochInterval = null;
+
+  }
+}
+
+function openBirthdayNightSky(button) {
+
+  const result =
+    document.getElementById("birthdayGiftResult");
+
+  if (!result) return;
+
+document.body.insertAdjacentHTML(
+  "beforeend",
+  `
+
+  <div id="birthdayNightSky" class="birthday-night-sky">
+
+    <div class="milky-way"></div>
+
+    <div
+      class="night-stars"
+      id="nightStars"
+    ></div>
+
+    <div
+      class="meteor-layer"
+      id="meteorLayer"
+    ></div>
+
+    <div class="night-moon">
+      <div class="moon-shadow"></div>
+    </div>
+
+    <div class="night-sky-content">
+
+      <div class="night-sky-title">
+        A little piece of the night sky ✨
+      </div>
+
+      <div class="night-sky-subtitle">
+      
+
+  Make a wish when you see a shooting star. 🌠
+</div>
+
+  <button
+    type="button"
+    class="wish-button"
+    onclick="makeFinalWish()"
+  >
+    I've made my wish ✨
+  </button>
+
+</div>
+    </div>
+
+  </div>
+
+  `
+);
+
+createNightStars();
+startPerseids();
+}
+function createNightStars() {
+
+  const container = document.getElementById("nightStars");
+
+  if (!container) {
+    console.log("nightStars container missing");
+    return;
+  }
+
+  container.innerHTML = "";
+
+  for (let i = 0; i < 260; i++) {
+
+    const star = document.createElement("span");
+
+    star.className = "night-star";
+
+    star.style.left =
+      Math.random() * 100 + "%";
+
+    star.style.top =
+      Math.random() * 100 + "%";
+
+    const size =
+      Math.random() * 2.5 + 0.5;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.animationDelay =
+      Math.random() * 5 + "s";
+
+    star.style.animationDuration =
+      2 + Math.random() * 4 + "s";
+
+    container.appendChild(star);
+
+    if (i < 6) {
+
+  star.classList.add("special-star");
+
+  star.addEventListener("click", () => {
+
+    revealStarMessage(star);
+
+  });
+
+}
+  }
+
+  
+
+  function revealStarMessage(star) {
+
+  const messages = [
+
+    "I hope this year brings you more happiness than you can imagine. ❤️",
+
+    "You deserve so many beautiful moments. ✨",
+
+    "Never forget how special you are. 🌙",
+
+    "I hope you keep finding reasons to smile. 💫",
+
+    "May this year be gentle, exciting and full of beautiful memories. 🌌",
+
+    "Whenever you look at the stars, I hope you remember this little moment. ❤️"
+
+  ];
+
+  const message =
+    messages[
+      Math.floor(
+        Math.random() * messages.length
+      )
+    ];
+
+  const popup =
+    document.createElement("div");
+
+  popup.className = "star-message";
+
+  popup.innerHTML = `
+
+    <div class="star-message-box">
+
+      <div class="star-message-symbol">
+        ✨
+      </div>
+
+      <p>
+        ${message}
+      </p>
+
+      <button
+        onclick="this.parentElement.parentElement.remove()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+  `;
+
+  document
+    .getElementById("birthdayNightSky")
+    .appendChild(popup);
+
+}
+
+}
+let perseidTimeout = null;
+
+function startPerseids() {
+
+  stopPerseids();
+
+  createPerseidBurst();
+
+}
+
+function createPerseidBurst() {
+
+  const amount =
+    Math.floor(Math.random() * 3) + 1;
+
+  for (let i = 0; i < amount; i++) {
+
+    setTimeout(() => {
+
+      createPerseid();
+
+    }, i * (150 + Math.random() * 300));
+
+  }
+
+  const nextBurst =
+    800 + Math.random() * 2500;
+
+  perseidTimeout =
+    setTimeout(
+      createPerseidBurst,
+      nextBurst
+    );
+}
+
+
+// 👇 OVO TI FALI
+
+function createPerseid() {
+
+  const container =
+    document.getElementById("meteorLayer");
+
+  if (!container) return;
+
+  const meteor =
+    document.createElement("span");
+
+  meteor.className = "perseid";
+
+  const size =
+    Math.random();
+
+  if (size > 0.82) {
+
+    meteor.classList.add("large");
+
+  } else if (size > 0.55) {
+
+    meteor.classList.add("medium");
+
+  }
+
+  meteor.style.left =
+    (Math.random() * 120 - 10) + "%";
+
+  meteor.style.top =
+    (Math.random() * 55 - 10) + "%";
+
+  meteor.style.animationDuration =
+    (0.7 + Math.random() * 1.2) + "s";
+
+  container.appendChild(meteor);
+
+  setTimeout(() => {
+
+    meteor.remove();
+
+  }, 2200);
+
+}
+
+
+function stopPerseids() {
+
+  if (perseidTimeout) {
+
+    clearTimeout(perseidTimeout);
+
+    perseidTimeout = null;
+
+  }
+
+}
+
+function showFinalDrawing() {
+
+  const sky =
+    document.getElementById("birthdayNightSky");
+
+  if (!sky) {
+    console.log("Birthday Night Sky nije pronađen.");
+    return;
+  }
+
+  const finalScene =
+    document.createElement("div");
+
+  finalScene.className =
+    "birthday-final-scene";
+
+  finalScene.innerHTML = `
+
+    <div class="final-atmosphere"></div>
+
+    <div class="final-hill"></div>
+
+    <div class="final-drawing-wrap">
+
+      <img
+        src="Hp1.png"
+        class="final-drawing"
+        alt=""
+      >
+
+    </div>
+
+    <div class="final-message">
+
+  <div class="final-message-line">
+    You once gave me a little piece of your heart...
+  </div>
+
+  <div class="final-message-line second">
+    so I wanted to give you a little piece of mine. ❤️
+  </div>
+
+  <div class="final-message-birthday">
+    Happy Birthday, my love.
+  </div>
+
+  <div class="final-message-memory">
+    May we always have nights worth remembering. 🌌
+  </div>
+
+</div>
+  `;
+
+const originalContent =
+  sky.querySelector(".night-sky-content");
+
+if (originalContent) {
+
+  originalContent.style.transition =
+    "opacity 1.5s ease";
+
+  originalContent.style.opacity = "0";
+
+}
+
+  sky.appendChild(finalScene);
+  
+  setTimeout(() => {
+
+  const message =
+    finalScene.querySelector(".final-message");
+
+  if (message) {
+
+    message.style.transition =
+      "opacity 3s ease";
+
+    message.style.opacity =
+      "0";
+
+  }
+
+}, 20000);
+
+}
+
+
+document.addEventListener("mousemove", (event) => {
+
+  const sky =
+    document.getElementById("birthdayNightSky");
+
+  if (!sky) return;
+
+  const x =
+    (event.clientX / window.innerWidth - 0.5) * 2;
+
+  const y =
+    (event.clientY / window.innerHeight - 0.5) * 2;
+
+  const stars =
+    document.getElementById("nightStars");
+
+  const milkyWay =
+    sky.querySelector(".milky-way");
+
+  const moon =
+    sky.querySelector(".night-moon");
+
+  if (stars) {
+
+    stars.style.transform =
+      `translate(${x * 6}px, ${y * 6}px)`;
+
+  }
+
+  if (milkyWay) {
+
+    milkyWay.style.transform =
+      `translate(${x * 12}px, ${y * 8}px) rotate(-18deg)`;
+
+  }
+
+  if (moon) {
+
+    moon.style.transform =
+      `translate(${x * 4}px, ${y * 4}px)`;
+
+  }
+
+});
+
+console.log("FINAL TEST:", typeof showFinalDrawing);
+
+function makeFinalWish() {
+
+  const sky =
+    document.getElementById("birthdayNightSky");
+
+  if (!sky) return;
+
+  const button =
+    sky.querySelector(".wish-button");
+
+  if (button) {
+
+    button.disabled = true;
+
+    button.style.pointerEvents =
+      "none";
+
+    button.style.opacity =
+      "0";
+
+  }
+
+  console.log("Wish made ✨");
+
+}
+function makeFinalWish() {
+
+  const sky =
+    document.getElementById("birthdayNightSky");
+
+  if (!sky) return;
+
+  const button =
+    sky.querySelector(".wish-button");
+
+  if (button) {
+
+    button.style.pointerEvents =
+      "none";
+
+    button.style.transition =
+      "opacity 1s ease";
+
+    button.style.opacity =
+      "0";
+
+  }
+
+  // Give the wish a small moment of silence
+  setTimeout(() => {
+
+    createFinalMeteor();
+
+  }, 1200);
+
+}
+function createFinalMeteor() {
+
+  const layer =
+    document.getElementById("meteorLayer");
+
+  if (!layer) return;
+
+  const meteor =
+    document.createElement("span");
+
+  meteor.className =
+    "final-meteor";
+
+  meteor.style.left =
+    "15%";
+
+  meteor.style.top =
+    "22%";
+
+  layer.appendChild(meteor);
+
+  setTimeout(() => {
+
+    meteor.remove();
+
+    setTimeout(() => {
+
+      showFinalDrawing();
+
+    }, 900);
+
+  }, 1800);
+
 }

@@ -2549,17 +2549,11 @@ function createNightStars() {
 
     "I hope this year brings you more happiness than you can imagine. ❤️",
 
-    "THIIIIIIIIIIIIIIIIIIIIIIIIIISSSSSSSSSSS MUUUUUUUUUUUUUUUUUCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH ❤️"
-
     "You deserve so many beautiful moments. ✨",
-
-    "omnomnomnom 😋",
 
     "Never forget how special you are. 🌙",
 
     "I hope you keep finding reasons to smile. 💫",
-
-    "boop 👉🏻👈🏻",
 
     "May this year be gentle, exciting and full of beautiful memories. 🌌",
 

@@ -1314,39 +1314,39 @@ function need(type) {
 const voiceMessages = {
 
   morning: [
-    "morning1.mp3",
-    "morning2.mp3",
-    "morning3.mp3"
+    "voices/morning1.mp3",
+    "voices/morning2.mp3",
+    "voices/morning3.mp3"
   ],
 
   night: [
-    "night1.mp3",
-    "night2.mp3",
-    "night3.mp3"
+    "voices/night1.mp3",
+    "voices/night2.mp3",
+    "voices/night3.mp3"
   ],
 
   sad: [
-    "sad1.mp3",
-    "sad2.mp3",
-    "sad3.mp3"
+    "voices/sad1.mp3",
+    "voices/sad2.mp3",
+    "voices/sad3.mp3"
   ],
 
   tired: [
-    "tired1.mp3",
-    "tired2.mp3",
-    "tired3.mp3"
+    "voices/tired1.mp3",
+    "voices/tired2.mp3",
+    "voices/tired3.mp3"
   ],
 
   miss: [
-    "miss1.mp3",
-    "miss2.mp3",
-    "miss3.mp3"
+    "voices/miss1.mp3",
+    "voices/miss2.mp3",
+    "voices/miss3.mp3"
   ],
 
   comfort: [
-    "comfort1.mp3",
-    "comfort2.mp3",
-    "comfort3.mp3"
+    "voices/comfort1.mp3",
+    "voices/comfort2.mp3",
+    "voices/comfort3.mp3"
   ]
 
 };
